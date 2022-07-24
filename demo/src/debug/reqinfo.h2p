@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>XWebServer+ 请求信息</title>
+        
+    </head>
+    <body>
+        <h1>XWebServer+ 请求信息</h1>
+        <table border="1">
+            <tr>
+                <td>请求方式</td>
+                <td><?pyeval recv_data["mode"] ></td>
+            </tr>
+            <tr>
+                <td>本地路径</td>
+                <td><?pyeval recv_data["path"] ></td>
+            </tr>
+            <tr>
+                <td>协议</td>
+                <td><?pyeval recv_data["protocol"] ></td>
+            </tr>
+            <tr>
+                <td>参数列表</td>
+                <td><?pyeval recv_data["args"]></td>
+            </tr>
+            <tr>
+                <td>Header</td>
+                <td><?pyeval recv_data["header"] ></td>
+            </tr>
+            <tr>
+                <td>工作目录</td>
+                <td>
+<?py 
+import os
+import os.path
+print(os.path.abspath(os.curdir))
+?>
+                </td>
+            </tr>
+            <tr>
+                <td>Recv_Data</td>
+                <td><?pyeval recv_data ></td>
+            </tr>
+        </table>
+    </body>
+</html>
+

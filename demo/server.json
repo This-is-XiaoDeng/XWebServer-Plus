@@ -1,0 +1,1 @@
+{"name": "Demo_Server", "server": {"ip": "127.0.0.1", "port": 19132, "root": "./src", "max": 1024, "error": []}, "default": ["index.html", "index.py", "index.h2p"]}
