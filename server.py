@@ -4,12 +4,14 @@ import sys
 import rich.console
 import traceback
 import os
+from urllib.request import urlopen
 import threading
 import os.path
+import keyboard
 import urllib.parse
 
 console = rich.console.Console()
-__ver__ = "1.0"
+__ver__ = "1.1"
 argv = sys.argv
 config = {}
 
@@ -217,9 +219,16 @@ def handle(sock, addr):
     except:
         console.print_exception(show_locals=True)
 
+def exit_server(addr):
+    global console
+    console.log("正在尝试退出 . . .")
+    urlopen(f"http://{addr}")
+
 def server():
     global config, console
+    keyboard.add_hotkey("ctrl+c", lambda: exit_server(f'{config["server"]["ip"]}:{config["server"]["port"]}'))
     tcp_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # tcp_client.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     tcp_client.bind((config["server"]["ip"], config["server"]["port"]))
     tcp_client.listen(config["server"]["max"])
     console.log(f'[green]服务器已在 {config["server"]["ip"]}:{config["server"]["port"]} 开启')
@@ -301,9 +310,11 @@ def createGuide() -> None:
 </center>""")
     console.print(f"服务器创建完成！您可以使用 [yellow]python server.py -c {os.path.abspath(os.curdir)} [/]启动")
 
+
+
 if __name__ == "__main__":
     args = parseArgs(argv)
-    console.print("[yellow]建议使用 任务管理器/htop 直接杀死 python 进程来停止 XWebServer+")
+    # console.print("[yellow]建议使用 任务管理器/htop 直接杀死 python 进程来停止 XWebServer+")
     if args["mode"] == "about":
         console.print(f"""XWebServer+ V{__ver__}
 作者：这里是小邓
