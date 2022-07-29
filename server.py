@@ -11,7 +11,7 @@ import keyboard
 import urllib.parse
 
 console = rich.console.Console()
-__ver__ = "1.1"
+__ver__ = "1.2"
 argv = sys.argv
 config = {}
 
@@ -24,7 +24,7 @@ for w in wd[0:-1]:
 # 解析报文
 def parseLocalPath(msg) -> str:
     global config
-    p = msg
+    p = urllib.parse.unquote(msg)
     if msg[0] == "/":
         p = p[1:]
     p = os.path.join(config["server"]["root"], p)
@@ -90,7 +90,7 @@ def readFile(path) -> tuple:
         status = 404
         with open(config["error"][404], "rb") as f:
             file = f.read()
-            file += path.encode()
+            file += ("<center>" + path + "</center>").encode()
     return file, status
 
 def getFileType(path, status) -> str:
