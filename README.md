@@ -2,7 +2,6 @@
 
 > 使用 Python3 编写动态网页
 
-[![Sponsor me!](https://img.shields.io/badge/Sponsor%20me!-green?logo=wechat&logoColor=white&style=flat-square)](https://thisisxd.tk/pay/)
 
 ## 依赖
 
@@ -39,7 +38,8 @@ python server.py <操作> [<选项>...]
 
 [ZH-CN](https://xiaodeng.tk/docs/XWebServerPlus)
 
-## 更新日志
+## 赞助
 
-### V1.2
-- 修复了中文目录无法解析的问题
+求赞助啦~
+
+[![Sponsor me!](https://img.shields.io/badge/Sponsor%20me!-green?logo=wechat&logoColor=white&style=flat-square)](https://thisisxd.tk/pay/)
