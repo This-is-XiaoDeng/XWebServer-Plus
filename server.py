@@ -11,7 +11,7 @@ import keyboard
 import urllib.parse
 
 console = rich.console.Console()
-__ver__ = "1.2"
+__ver__ = "1.3"
 argv = sys.argv
 config = {}
 
@@ -61,7 +61,7 @@ def analysisHeader(msg) -> dict:
     headers = msg       # msg.split("\r\n")
     header = {}
     for h in headers:
-        t = h.split(":")
+        t = h.split(": ")
         header[t[0]] = t[1]
     return header
 
@@ -207,7 +207,7 @@ def handle(sock, addr):
         if status == 200:
             if fileType == "py":
                 file, status = runPyPage(file.decode(), recv_data)
-            elif fileType == "h2p":
+            elif fileType == "h2p" or fileType == "h5p":
                 file, status = runPyInPage(file.decode(), recv_data)
             
         resp_data = f"HTTP/1.1 {status} {config['HttpCodeMsg'][str(status)]}\r\n\r\n".encode()

@@ -1,0 +1,22 @@
+site_name: XWebServer+ 中文文档
+nav:
+  - 主页: index.md
+  - 命令: commands.md
+  - 开发文档:
+    - 准备工作: help/index.md
+    - 创建服务器: help/create.md
+    - 配置文件: help/config.md
+    - 使用Python编写页面:
+      - Python Page: help/write.py.md
+      - HTML with Python: help/write.h5p.md 
+    - 500错误: help/err500.md
+  - 附录:
+    - 变量对照表: variable.md
+    - 相关链接: links.md
+  - 更新日志:
+    - V1.2: update/1.2.md
+    - V1.1: update/1.1.md
+    - Beta 1.0: update/1.0-beta.md
+
+
+copyright: Copyright © 2022 This-is-XiaoDeng.

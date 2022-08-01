@@ -1,2 +1,2 @@
-recv_data = {}
-pageData = {}
+recv_data: dict
+pageData: dict
