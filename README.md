@@ -2,6 +2,8 @@
 
 > 使用 Python3 编写动态网页
 
+[![Sponsor me!](https://img.shields.io/badge/Sponsor%20me!-green?logo=wechat&logoColor=white&style=flat-square)](https://thisisxd.tk/pay/)
+
 ## 依赖
 
 1. Python3
@@ -35,7 +37,7 @@ python server.py <操作> [<选项>...]
 
 ## 文档
 
-> 正在写，别急
+[ZH-CN](https://xiaodeng.tk/docs/XWebServerPlus)
 
 ## 更新日志
 
