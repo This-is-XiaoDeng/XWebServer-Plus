@@ -6,7 +6,7 @@
 ## 依赖
 
 1. Python3
-2. Keyboard
+2. Keyboard(可选)
 
 ## 构建步骤
 
@@ -15,7 +15,7 @@
 git clone https://github.com/This-is-XiaoDeng/XWebServer-Plus.git
 ```
 2. 安装 Python3
-3. 安装KeyBoard
+3. 安装KeyBoard(可选)
 ```bash
 pip install keyboard
 ```
@@ -37,6 +37,8 @@ python server.py <操作> [<选项>...]
 ## 文档
 
 [ZH-CN](https://xiaodeng.tk/docs/XWebServerPlus)
+
+> 文档更新会有一些延时
 
 ## 赞助
 

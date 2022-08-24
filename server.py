@@ -7,11 +7,12 @@ import os
 from urllib.request import urlopen
 import threading
 import os.path
+import time
 import keyboard
 import urllib.parse
 
 console = rich.console.Console()
-__ver__ = "1.3"
+__ver__ = "1.4"
 argv = sys.argv
 config = {}
 
@@ -67,14 +68,14 @@ def analysisHeader(msg) -> dict:
 
 def analysisMsg(message) -> dict: 
     """analysisMsg(String: message) -> dict"""
-    global console
+    global console, inUse
     msg = message.split("\r\n\r\n")
     _msg = msg[0].split("\r\n")
     # 组成
     recv_data = analysisRequestData(_msg[0],msg)
     # console.log(_msg)
     recv_data["header"] = analysisHeader(_msg[1:])
-    console.log(recv_data)
+    
     return recv_data  
 
 # 读取页面
@@ -130,10 +131,9 @@ def runPyPage(code, recv_data) -> tuple:
     global print_text, oldstdout, inUse, pageData
     file = b""
     status = 200
-    while True:     # 排队
-        if inUse == False:
-            inUse = True
-            break
+    while inUse:     # 排队
+        time.sleep(0.1)
+    inUse = True
     try:
         print_text = ""
         sys.stdout = newstdout
@@ -181,10 +181,9 @@ def runPyInPage(code, recv_data) -> tuple:
     global print_text, oldstdout, inUse, a
     file = b''
     status = 200
-    while True:     # 排队
-        if inUse == False:
-            inUse = True
-            break
+    while inUse:     # 排队
+        time.sleep(0.1)
+    inUse = True
     try:
         sys.stdout = newstdout
         file = runPyIn(runPyIn_eval(code, recv_data), recv_data).encode()
@@ -198,7 +197,7 @@ def runPyInPage(code, recv_data) -> tuple:
 
 # 处理请求
 def handle(sock, addr):
-    global console, config
+    global console, config, inUse
     try:
         recv_data = analysisMsg(sock.recv(1024).decode())            # 解析请求报文
         file, status = readFile(recv_data["path"])          # 读取文件
@@ -210,14 +209,27 @@ def handle(sock, addr):
             elif fileType == "h2p" or fileType == "h5p":
                 file, status = runPyInPage(file.decode(), recv_data)
             
-        resp_data = f"HTTP/1.1 {status} {config['HttpCodeMsg'][str(status)]}\r\n\r\n".encode()
+        resp_data = f"{recv_data['protocol']} {status} {config['HttpCodeMsg'][str(status)]}\r\n\r\n".encode()
         resp_data += file
 
         sock.send(resp_data)
         sock.close()
         
     except:
+        while inUse:       # 排队
+            time.sleep(0.1)
+        inUse = True
         console.print_exception(show_locals=True)
+        inUse = False
+    
+    while inUse:
+        time.sleep(0.1)
+    inUse = True
+    try:
+        console.log(recv_data)
+    except:
+        pass
+    inUse = False
 
 def exit_server(addr):
     global console
