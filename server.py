@@ -41,7 +41,7 @@ def analysisRequestData(msg, a) -> dict:
     req_d = msg.split(" ")
     # 寻找参数
     if req_d[0] == "POST":
-        _arg = a[2]
+        _arg = a[1]
     else:
         _start = req_d[1].find("?")
         if _start != -1:
