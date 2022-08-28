@@ -12,7 +12,7 @@ import keyboard
 import urllib.parse
 
 console = rich.console.Console()
-__ver__ = "1.4"
+__ver__ = "1.5"
 argv = sys.argv
 config = {}
 
