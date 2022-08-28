@@ -232,9 +232,13 @@ def handle(sock, addr):
     inUse = False
 
 def exit_server(addr):
-    global console
-    console.log("正在尝试退出 . . .")
+    global console, inUse
     urlopen(f"http://{addr}")
+    while inUse:
+        time.sleep(0.1)
+    inUse = True
+    console.log("已尝试退出")
+    inUse = False
 
 def server():
     global config, console
@@ -248,7 +252,7 @@ def server():
     while True:
         sock, addr = tcp_client.accept()
         t = threading.Thread(None, lambda: handle(sock, addr))
-        t.setDaemon(True)
+        # t.setDaemon(True)
         t.start()
 
 def initServer():
