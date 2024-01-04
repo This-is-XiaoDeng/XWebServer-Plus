@@ -2,7 +2,7 @@
 使用 Python3 编写动态网页
 
 > [!WARNING]
-> 此项目已不受维护，为防止安全性问题，请不要在生产环境使用它！
+> 此项目已不受维护，为防止安全性问题，请不要在生产环境使用它！如果您需要类似功能，可以尝试 [pyscript/pyscript](https://github.com/pyscript/pyscript)。
 
 ## 依赖
 
